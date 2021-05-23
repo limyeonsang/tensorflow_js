@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TensorFlow.js Tutorial</title>
+
+    <!-- Import TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis"></script>
+    <script src="boston_data2.js"></script>
+</head>
+
+<body>
+    <script>
+        var X_train = tf.tensor(bst_x_data);
+        var y_train = tf.tensor(bst_y_data);
+        
+
+        var X = tf.input({ shape: [12] });
+        var Y = tf.layers.dense({ units: 2 }).apply(X);
+        var model = tf.model({ inputs: X, outputs: Y });
+        var compileParam = { optimizer: tf.train.adam(), loss: tf.losses.meanSquaredError }
+        model.compile(compileParam);
+        // summary
+        tfvis.show.modelSummary({name:'요약', tab:'모델'}, model);
+
+        var  fitParam = { 
+            epochs: 100,
+            callbacks:{
+                onEpochEnd:
+                    function(epoch, logs){
+                        console.log('epoch', epoch, logs, 'RMSE=>', Math.sqrt(logs.loss));
+                        tfvis.show.history({name:'loss',  tab:'histroy'}, [{loss:10}, {loss:5}, {loss:1}], ['loss'])
+                    }
+                }
+            } 
+        model.fit(X_train, y_train, fitParam).then(function (result) {
+            var pred = model.predict(X_train);
+            pred.print();
+            // y_data = [[4.98, 24], [9.14, 21.6]]
+        });  
+        
+    </script>
+</body>
+
+</html>

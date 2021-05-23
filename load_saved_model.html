@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+    </head>
+    <body>
+        <script>
+            tf.loadLayersModel('localstorage://test2').then(function(model){
+                model.predict(tf.tenor(20)).print();
+            });
+        </script>
+    </body>
+</html>

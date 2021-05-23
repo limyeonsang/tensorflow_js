@@ -1,0 +1,19 @@
+{
+  "name": "tensorflow_js",
+  "version": "1.0.0",
+  "description": "js for tensorflow",
+  "main": "index.js",
+  "dependencies": {
+    "@tensorflow/tfjs": "^3.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/limyeonsang/tensorflow_js.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
